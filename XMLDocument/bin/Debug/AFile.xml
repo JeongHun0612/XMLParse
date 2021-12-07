@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Afile>
+  <VendorPart>
+    <ObjectID/>
+    <number>SUMA_VP_000001</number>
+    <name>suma_vendor_part_1</name>
+    <defaultUnit>ea</defaultUnit>
+    <endItem>false</endItem>
+    <defaultTraceCode>0</defaultTraceCode>
+    <genericType>standard</genericType>
+    <partType>separable</partType>
+    <partSource>buy</partSource>
+    <domainName>/Default</domainName>
+    <folderPath>/Default</folderPath>
+    <view>((null))</view>
+    <versionInfo>
+      <versionId>A</versionId>
+      <iterationId>1</iterationId>
+      <versionLevel>1</versionLevel>
+      <series>wt.series.HarvardSeries</series>
+    </versionInfo>
+    <lifecycleInfo>
+      <lifecycleTemplateName>Default</lifecycleTemplateName>
+      <lifecycleState>INWORK</lifecycleState>
+    </lifecycleInfo>
+    <teamIdentity>Default</teamIdentity>
+    <externalTypeId>WCTYPE|com.ptc.windchill.suma.part.ManufacturerPart</externalTypeId>
+    <supplierName>My Vendor A</supplierName>
+  </VendorPart>
+</Afile>
+
