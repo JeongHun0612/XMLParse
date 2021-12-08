@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<category id="category1">
+  <name>VS code</name>
+  <type>Xml Sample Document</type>
+  <version>2019</version>
+  <food store="Gimchun">
+    <name>DDeok guk</name>
+    <name>Ramyeon</name>
+    <kimbop>
+      <add menu="chamchi"></add>
+      <add menu="kimchi"></add>
+      <add menu="egg"></add>
+      <add menu="spicy"></add>
+    </kimbop>
+  </food>
+  <shortname>T1</shortname>
+  <shortname>T2</shortname>
+  <shortname>T3</shortname>
+</category>

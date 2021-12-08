@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 
 namespace XMLDocument
@@ -16,7 +13,10 @@ namespace XMLDocument
             tagNameDic.Add("Point", null);
 
             //new Program().XMLParsing("AFile.xml", "VendorPart", tagNameDic);
-            new Program().XMLAllParsing("AFile.xml", "VendorPart");
+            //new Program().XMLAllParsing("AFile.xml", "VendorPart");
+
+            //TestClass.PrintXmlNode(TestClass.XMLAllParser("AFile.xml"));
+            TestClass.XMLDocumentParser("AFile.xml");
 
             Console.ReadLine();
         }
@@ -51,6 +51,7 @@ namespace XMLDocument
 
             XmlDocument xmlFile = new XmlDocument();
             xmlFile.Load(xmlName);
+
             XmlNodeList xmlList = xmlFile.GetElementsByTagName(topLevelTag);
 
             foreach (XmlNode xnList in xmlList)
@@ -65,8 +66,7 @@ namespace XMLDocument
         {
             foreach (XmlNode item in xnList.ChildNodes)
             {
-                Console.WriteLine(xnList[item.LocalName].InnerText);
-
+                Console.WriteLine(item.LocalName + " : " + xnList[item.LocalName].InnerText);
                 ResultListModel resultListModel = new ResultListModel(item.LocalName, xnList[item.LocalName].InnerText);
                 resultList.Add(resultListModel);
 
@@ -74,10 +74,7 @@ namespace XMLDocument
                 {
                     this.AddResultList(item, resultListModel.resultDataChild);
                 }
-
-                //Console.WriteLine(item.LocalName, xnList[item.LocalName].InnerText);
-                //Console.WriteLine(item.ChildNodes.Count);
-
+                else { }
                 //if (item.ChildNodes.Item(1) != null)
                 //{
                 //    this.AddResultList(item, resultListModel.resultDataChild);
