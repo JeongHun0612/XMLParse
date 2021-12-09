@@ -2,7 +2,6 @@
 <cdm xmlns:xsi="http://microsoft.com/schemas/VisualStudio/TeamTest/2010"
      xsi:noNamespaceSchecmal="http://microsoft.com/schemas/VisualStudio/TeamTest/2010"
      id="CCSDS_CDM_VERS" version="1.0">
-
   <VendorPart>
     <ObjectID/>
     <number>SUMA_VP_000001</number>
@@ -16,16 +15,22 @@
     <domainName>/Default</domainName>
     <folderPath>/Default</folderPath>
     <view>((null))</view>
-    <versionInfo id="versionInfo1" test="test2">
+    <versionInfo id="versionInfoId1">
       <versionId>A</versionId>
       <iterationId>1</iterationId>
       <versionLevel>1</versionLevel>
       <series>wt.series.HarvardSeries</series>
     </versionInfo>
-    <versionInfo id="versionInfo2" test="test2">
+    <versionInfo id="versionInfoId2">
       <versionId>B</versionId>
       <iterationId>2</iterationId>
       <versionLevel>2</versionLevel>
+      <series>wt.series.HarvardSeries</series>
+    </versionInfo>
+    <versionInfo id="versionInfoId3">
+      <versionId>C</versionId>
+      <iterationId>3</iterationId>
+      <versionLevel>3</versionLevel>
       <series>wt.series.HarvardSeries</series>
     </versionInfo>
     <lifecycleInfo>
