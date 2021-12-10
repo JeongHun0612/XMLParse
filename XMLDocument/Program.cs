@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Xml;
 
 namespace XMLDocument
 {
@@ -9,18 +7,30 @@ namespace XMLDocument
     {
         static void Main(string[] args)
         {
-            // 1. List<ParserResultModel> 반환
-            //string[] tagNameArray = new string[] { "cdm", "name", "versionId", "iterationId" };
-            //XmlParser.PrintXmlNode(XmlParser.XmlSelectParser("../../AFile.xml", tagNameArray));
-            //XmlParser.PrintXmlNode(XmlParser.XmlAllParser("../../AFile.xml"));
-
             XmlParser xmlParser = new XmlParser();
-            string[] tagNameArray = new string[] { "name", "versionInfo", "lifecycleInfo" };
+            string[] tagNameArray = new string[] { "versionInfo" };
 
-            //xmlParser.PrintResultList(xmlParser.XmlAllParser("../../AFile.xml"));
-            xmlParser.PrintResultList(xmlParser.XmlSelectParser("../../AFile.xml", tagNameArray));
+            //List<ParserResultModel> resultList = xmlParser.XmlAllParser("../../AFile.xml");
+            List<ParserResultModel> resultList = xmlParser.XmlSelectParser("../../AFile.xml", "versionInfo");
+
+            new Program().PrintRsultData(resultList);
 
             Console.ReadLine();
+        }
+
+        private void PrintRsultData(List<ParserResultModel> resultList)
+        {
+            for (int i = 0; i < resultList.Count; i++)
+            {
+                Console.WriteLine("[{0}]{1} : {2}", resultList[i].ParentNodeIndex, resultList[i].LocalName, resultList[i].InnerText);
+
+                if (resultList[i].ChildNodeList != null)
+                {
+                    PrintRsultData(resultList[i].ChildNodeList);
+                }
+            }
+
+            Console.WriteLine();
         }
     }
 }
