@@ -11,7 +11,7 @@ namespace XMLDocument
             string[] tagNameArray = new string[] { "versionInfo" };
 
             //List<ParserResultModel> resultList = xmlParser.XmlAllParser("../../AFile.xml");
-            List<ParserResultModel> resultList = xmlParser.XmlSelectParser("../../AFile.xml", "versionInfo");
+            List<ParserResultModel> resultList = xmlParser.XmlSelectParser("../../AFile.xml", "cdm");
 
             new Program().PrintRsultData(resultList);
 

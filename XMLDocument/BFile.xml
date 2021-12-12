@@ -1,19 +1,2 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<root>
-  <A>
-    <B>
-      <C>C1</C>
-      <D>D1</D>
-      <E>E1</E>
-      <F>F1</F>
-    </B>
-  </A>
-  <A>
-    <B>
-      <C>C2</C>
-      <D>D2</D>
-      <E>E2</E>
-      <F>F2</F>
-    </B>
-  </A>
-</root>
+<root>Test</root>
