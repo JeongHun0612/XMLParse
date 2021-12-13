@@ -12,3 +12,10 @@ C:\Users\sjh96\OneDrive\바탕 화면\XMLParse\XMLDocument\obj\Debug\XMLDocument
 C:\Users\sjh96\OneDrive\바탕 화면\XMLParse\XMLDocument\obj\Debug\XMLDocument.csproj.CoreCompileInputs.cache
 C:\Users\sjh96\OneDrive\바탕 화면\XMLParse\XMLDocument\obj\Debug\XMLDocument.exe
 C:\Users\sjh96\OneDrive\바탕 화면\XMLParse\XMLDocument\obj\Debug\XMLDocument.pdb
+C:\Users\sjh96\source\repos\XMLParse\XMLDocument\bin\Debug\XMLDocument.exe.config
+C:\Users\sjh96\source\repos\XMLParse\XMLDocument\bin\Debug\XMLDocument.exe
+C:\Users\sjh96\source\repos\XMLParse\XMLDocument\bin\Debug\XMLDocument.pdb
+C:\Users\sjh96\source\repos\XMLParse\XMLDocument\obj\Debug\XMLDocument.csproj.AssemblyReference.cache
+C:\Users\sjh96\source\repos\XMLParse\XMLDocument\obj\Debug\XMLDocument.csproj.CoreCompileInputs.cache
+C:\Users\sjh96\source\repos\XMLParse\XMLDocument\obj\Debug\XMLDocument.exe
+C:\Users\sjh96\source\repos\XMLParse\XMLDocument\obj\Debug\XMLDocument.pdb

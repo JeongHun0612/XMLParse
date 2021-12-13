@@ -8,12 +8,14 @@ namespace XMLDocument
         static void Main(string[] args)
         {
             XmlParser xmlParser = new XmlParser();
-            string[] tagNameArray = new string[] { "versionInfo" };
+            string[] tagNameArray = new string[] { "versionInfo", "number" };
 
             //List<ParserResultModel> resultList = xmlParser.XmlAllParser("../../AFile.xml");
-            List<ParserResultModel> resultList = xmlParser.XmlSelectParser("../../AFile.xml", "cdm");
+            //List<ParserResultModel> resultList = xmlParser.XmlSelectParser("../../AFile.xml", tagNameArray);
 
-            new Program().PrintRsultData(resultList);
+            Dictionary<string, List<ParserResultModel>> resultDic = xmlParser.XmlSelectParser("../../AFile.xml", tagNameArray);
+
+            //new Program().PrintRsultData(resultList);
 
             Console.ReadLine();
         }

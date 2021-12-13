@@ -10,38 +10,44 @@ namespace XMLDocument
         List<ParserResultModel> resultList = new List<ParserResultModel>(); // 결과 데이터 리스트 생성
         XmlDocument xmlDoc = new XmlDocument();                             // XmlDocument 클래스 생성
 
-        public List<ParserResultModel> XmlSelectParser(string filePath, string tagNameArray)
+        public Dictionary<string, List<ParserResultModel>> XmlSelectParser(string filePath, string[] tagNameArray)
         {
-            // 결과 데이터 리스트 제거
-            resultList.Clear();
+            Dictionary<string, List<ParserResultModel>> resultDic = new Dictionary<string, List<ParserResultModel>>();
 
             // Xml 파일 로드
             xmlDoc.Load(filePath);
 
             // 입력 받은 string으로 xml 파일 검색
-            XmlNodeList xmlList = xmlDoc.GetElementsByTagName(tagNameArray);
-
-            for (int i = 0; i < xmlList.Count; i++)
+            for (int i = 0; i < tagNameArray.Length; i++)
             {
-                if (xmlList[i].HasChildNodes)
+                List<ParserResultModel> resultList = new List<ParserResultModel>();
+
+                XmlNodeList xmlList = xmlDoc.GetElementsByTagName(tagNameArray[i]);
+
+                for (int j = 0; j < xmlList.Count; j++)
                 {
-                    if (xmlList[i].ChildNodes[0].NodeType == XmlNodeType.Text)
+                    if (xmlList[j].HasChildNodes)
                     {
-                        resultList.Add(new ParserResultModel(i, xmlList[i].ParentNode, xmlList[i].LocalName, xmlList[i].InnerText));
-                    }
-                    else if (xmlList[i].ChildNodes[0].NodeType == XmlNodeType.Element)
-                    {
-                        ParserResultModel rootNode = new ParserResultModel(i, xmlList[i].ParentNode, xmlList[i].LocalName);
+                        if (xmlList[j].ChildNodes[0].NodeType == XmlNodeType.Text)
+                        {
+                            resultList.Add(new ParserResultModel(j, xmlList[j].ParentNode, xmlList[j].LocalName, xmlList[j].InnerText));
+                        }
+                        else if (xmlList[j].ChildNodes[0].NodeType == XmlNodeType.Element)
+                        {
+                            ParserResultModel rootNode = new ParserResultModel(j, xmlList[j].ParentNode, xmlList[j].LocalName);
 
-                        resultList.Add(rootNode);
+                            resultList.Add(rootNode);
 
-                        AddResultList(xmlList[i].ChildNodes, rootNode);
+                            AddResultList(xmlList[j].ChildNodes, rootNode);
+                        }
+                        else { }
                     }
-                    else { }
                 }
+
+                resultDic.Add(tagNameArray[i], resultList);
             }
 
-            return resultList;
+            return resultDic;
         }
 
         public List<ParserResultModel> XmlAllParser(string filePath)
