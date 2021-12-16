@@ -1,50 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml;
 
 namespace XMLDocument
 {
     class XmlParser
     {
-        List<ParserResultModel> resultList = new List<ParserResultModel>(); // 결과 데이터 리스트 생성
-        XmlDocument xmlDoc = new XmlDocument();                             // XmlDocument 클래스 생성
+        // XmlDocument 클래스 생성
+        XmlDocument xmlDoc = new XmlDocument();
 
+        // 원하는 Xml 데이터 추출
         public Dictionary<string, List<ParserResultModel>> XmlSelectParser(string filePath, string[] tagNameArray)
         {
+            // 결과 Dictinoary 생성
             Dictionary<string, List<ParserResultModel>> resultDic = new Dictionary<string, List<ParserResultModel>>();
 
             // Xml 파일 로드
             xmlDoc.Load(filePath);
 
             // 입력 받은 string으로 xml 파일 검색
-            for (int i = 0; i < tagNameArray.Length; i++)
+            for (int tagNameIndex = 0; tagNameIndex < tagNameArray.Length; tagNameIndex++)
             {
+                // 결과 List 생성
                 List<ParserResultModel> resultList = new List<ParserResultModel>();
 
-                XmlNodeList xmlList = xmlDoc.GetElementsByTagName(tagNameArray[i]);
+                // 입력받은 tagName과 일치하는 모든 하위 요소의 목록이 포함된 XmlNodeList 
+                XmlNodeList xmlList = xmlDoc.GetElementsByTagName(tagNameArray[tagNameIndex]);
 
-                for (int j = 0; j < xmlList.Count; j++)
-                {
-                    if (xmlList[j].HasChildNodes)
-                    {
-                        if (xmlList[j].ChildNodes[0].NodeType == XmlNodeType.Text)
-                        {
-                            resultList.Add(new ParserResultModel(j, xmlList[j].ParentNode, xmlList[j].LocalName, xmlList[j].InnerText));
-                        }
-                        else if (xmlList[j].ChildNodes[0].NodeType == XmlNodeType.Element)
-                        {
-                            ParserResultModel rootNode = new ParserResultModel(j, xmlList[j].ParentNode, xmlList[j].LocalName);
+                // xmlList의 값을 결과 리스트에 추가
+                AddResultList(xmlList, resultList);
 
-                            resultList.Add(rootNode);
-
-                            AddResultList(xmlList[j].ChildNodes, rootNode);
-                        }
-                        else { }
-                    }
-                }
-
-                resultDic.Add(tagNameArray[i], resultList);
+                // tagName과 해당 tagName의 결과 리스트 추가
+                resultDic.Add(tagNameArray[tagNameIndex], resultList);
             }
 
             return resultDic;
@@ -52,8 +39,8 @@ namespace XMLDocument
 
         public List<ParserResultModel> XmlAllParser(string filePath)
         {
-            // 결과 데이터 리스트 제거
-            resultList.Clear();
+            // 결과 데이터 리스트 생성
+            List<ParserResultModel> resultList = new List<ParserResultModel>();
 
             // Xml 파일 로드
             xmlDoc.Load(filePath);
@@ -61,76 +48,61 @@ namespace XMLDocument
             // 최상위 노드 검색
             XmlNodeList xmlList = xmlDoc.GetElementsByTagName(xmlDoc.DocumentElement.LocalName);
 
-            ParserResultModel rootNode = new ParserResultModel(0, xmlList[0].ParentNode, xmlList[0].LocalName);
-            resultList.Add(rootNode);
-
-            AddResultList(xmlList[0].ChildNodes, rootNode);
+            // xmlList의 값을 결과 리스트에 추가
+            AddResultList(xmlList, resultList);
 
             return resultList;
         }
 
-        private void AddResultList(XmlNodeList xmlList, ParserResultModel currentNode)
-        {
-            for (int i = 0; i < xmlList.Count; i++)
-            {
-                if (xmlList[i].HasChildNodes)
-                {
-                    // 자식이 없는 노드
-                    if (xmlList[i].ChildNodes[0].NodeType == XmlNodeType.Text)
-                    {
-                        currentNode.ChildNodeList.Add(new ParserResultModel(i, xmlList[i].ParentNode, xmlList[i].LocalName, xmlList[i].InnerText));
-                    }
-                    // 자식이 있는 노드
-                    else if (xmlList[i].ChildNodes[0].NodeType == XmlNodeType.Element)
-                    {
-                        ParserResultModel childNode = new ParserResultModel(i, xmlList[i].ParentNode, xmlList[i].LocalName);
-                        currentNode.ChildNodeList.Add(childNode);
-
-                        AddResultList(xmlList[i].ChildNodes, childNode);
-                    }
-                    else { }
-                }
-            }
-        }
-
-
-        private void AddResultList(XmlNodeList xmlList, ParserResultModel currentNode, int parentNodeIndex)
+        private void AddResultList(XmlNodeList xmlList, List<ParserResultModel> resultList)
         {
             // xmlList 수 만큼 반복
-            for (int i = 0; i < xmlList.Count; i++)
+            for (int nodeIndex = 0; nodeIndex < xmlList.Count; nodeIndex++)
             {
-                // nodeType이 Text이면 현재 클래스에 InnerText값 추가
-                if (xmlList[i].NodeType == XmlNodeType.Text)
-                {
-                    currentNode.InnerText = xmlList[i].InnerText;
-                }
-                // nodeType이 Element이면 클래스 생성 후 리스트 추가
-                else if (xmlList[i].NodeType == XmlNodeType.Element)
-                {
-                    //currentNode = new ParserResultModel(xmlList[i].ParentNode, ParentNodeIndex, xmlList[i].LocalName);
-                    //currentNode.ChildNodeList.Add(currentNode);
+                // currentNode 생성
+                ParserResultModel currentNode = new ParserResultModel(nodeIndex, xmlList[nodeIndex].LocalName);
 
-                    // Attributes가 0개 이상이면 현재 클래스에 Attributes값 추가
-                    if (xmlList[i].Attributes.Count > 0)
-                    {
-                        //AddAttributes(xmlList[i].Attributes);
-                    }
-                    else { }
+                // xmlNode의 Attributes가 1개 이상이면
+                if (xmlList[nodeIndex].Attributes.Count >= 1)
+                {
+                    // currentNode의 Attributes추가
+                    AddAttributes(xmlList[nodeIndex].Attributes, currentNode);
                 }
                 else { }
 
-                // 자식노드가 없을때까지 반복
-                AddResultList(xmlList[i].ChildNodes, currentNode, parentNodeIndex);
+                // xmlNode의 자식노드가 있으면 true
+                if (xmlList[nodeIndex].HasChildNodes)
+                {
+                    // 자식노드의 타입이 Text이면 currentNode의 InnerText 추가
+                    if (xmlList[nodeIndex].FirstChild.NodeType == XmlNodeType.Text)
+                    {
+                        currentNode.InnerText = xmlList[nodeIndex].InnerText;
+                    }
+                    // 자식노드의 타입이 Element이면 currentNode의 자식노드리스트 생성 후 함수 실행
+                    else if (xmlList[nodeIndex].FirstChild.NodeType == XmlNodeType.Element)
+                    {
+                        currentNode.ChildNodeList = new List<ParserResultModel>();
+
+                        AddResultList(xmlList[nodeIndex].ChildNodes, currentNode.ChildNodeList);
+                    }
+                    else { }
+
+                    resultList.Add(currentNode);
+                }
+                else { }
             }
         }
 
         private void AddAttributes(XmlAttributeCollection xmlAttribute, ParserResultModel currentNode)
         {
+            // Attributes 생성
             currentNode.Attributes = new Dictionary<string, string>();
 
-            for (int i = 0; i < xmlAttribute.Count; i++)
+            // Attributes 수 만큼 반복
+            for (int index = 0; index < xmlAttribute.Count; index++)
             {
-                currentNode.Attributes.Add(xmlAttribute[i].Name, xmlAttribute[i].Value);
+                // currentNode의 Attributes 추가
+                currentNode.Attributes.Add(xmlAttribute[index].Name, xmlAttribute[index].Value);
             }
         }
     }

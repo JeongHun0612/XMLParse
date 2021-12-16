@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace XMLDocument
 {
@@ -8,31 +9,45 @@ namespace XMLDocument
         static void Main(string[] args)
         {
             XmlParser xmlParser = new XmlParser();
-            string[] tagNameArray = new string[] { "versionInfo", "number" };
+            string[] tagNameArray = new string[] { "versionInfo", "name", "number" };
 
             //List<ParserResultModel> resultList = xmlParser.XmlAllParser("../../AFile.xml");
-            //List<ParserResultModel> resultList = xmlParser.XmlSelectParser("../../AFile.xml", tagNameArray);
-
             Dictionary<string, List<ParserResultModel>> resultDic = xmlParser.XmlSelectParser("../../AFile.xml", tagNameArray);
 
-            //new Program().PrintRsultData(resultList);
+            // XmlAllParser 출력
+            //Print(resultList);
+
+            // XmlSelectParser 출력
+            for (int i = 0; i < resultDic.Count; i++)
+            {
+                Console.WriteLine("===========================================================");
+                Print(resultDic[tagNameArray[i]]);
+            }
 
             Console.ReadLine();
         }
 
-        private void PrintRsultData(List<ParserResultModel> resultList)
+        public static void Print(List<ParserResultModel> resultList)
         {
-            for (int i = 0; i < resultList.Count; i++)
+            for (int index = 0; index < resultList.Count; index++)
             {
-                Console.WriteLine("[{0}]{1} : {2}", resultList[i].ParentNodeIndex, resultList[i].LocalName, resultList[i].InnerText);
+                Console.WriteLine("[{0}] {1} : {2}", resultList[index].ParentNodeIndex, resultList[index].LocalName, resultList[index].InnerText);
 
-                if (resultList[i].ChildNodeList != null)
+                if (resultList[index].Attributes != null)
                 {
-                    PrintRsultData(resultList[i].ChildNodeList);
+                    for (int attrIndex = 0; attrIndex < resultList[index].Attributes.Count; attrIndex++)
+                    {
+                        Console.WriteLine("{0} : {1}", resultList[index].Attributes.Keys.ToList()[attrIndex], 
+                                                                    resultList[index].Attributes.Values.ToList()[attrIndex]);
+                    }
+                }
+
+                if (resultList[index].ChildNodeList != null)
+                {
+                    Print(resultList[index].ChildNodeList);
+                    Console.WriteLine();
                 }
             }
-
-            Console.WriteLine();
         }
     }
 }

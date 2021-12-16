@@ -3,6 +3,7 @@
      xsi:noNamespaceSchecmal="http://microsoft.com/schemas/VisualStudio/TeamTest/2010"
      id="CCSDS_CDM_VERS" version="1.0">
   <VendorPart>
+    <Object/>
     <number>SUMA_VP_000001</number>
     <name>suma_vendor_part_1</name>
     <defaultUnit>ea</defaultUnit>
