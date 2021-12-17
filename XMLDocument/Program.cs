@@ -9,10 +9,14 @@ namespace XMLDocument
         static void Main(string[] args)
         {
             XmlParser xmlParser = new XmlParser();
-            string[] tagNameArray = new string[] { "versionInfo", "name", "number" };
+            string[] tagNameArray = new string[] { "Object", "versionInfo", "name", "number" };
+            string filePath = "../../AFile.xml";
 
-            //List<ParserResultModel> resultList = xmlParser.XmlAllParser("../../AFile.xml");
-            Dictionary<string, List<ParserResultModel>> resultDic = xmlParser.XmlSelectParser("../../AFile.xml", tagNameArray);
+            // XmlAllParser 데이터 불러오기
+            List<ParserResultModel> resultList = xmlParser.XmlAllParser(filePath);
+
+            // XmlSelectParser 데이터 불러오기
+            Dictionary<string, List<ParserResultModel>> resultDic = xmlParser.XmlSelectParser(filePath, tagNameArray);
 
             // XmlAllParser 출력
             //Print(resultList);

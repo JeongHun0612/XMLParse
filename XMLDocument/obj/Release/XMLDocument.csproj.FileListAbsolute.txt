@@ -1,0 +1,7 @@
+C:\Users\sjh96\source\repos\XMLParse\XMLDocument\bin\Release\XMLDocument.exe.config
+C:\Users\sjh96\source\repos\XMLParse\XMLDocument\bin\Release\XMLDocument.exe
+C:\Users\sjh96\source\repos\XMLParse\XMLDocument\bin\Release\XMLDocument.pdb
+C:\Users\sjh96\source\repos\XMLParse\XMLDocument\obj\Release\XMLDocument.csproj.AssemblyReference.cache
+C:\Users\sjh96\source\repos\XMLParse\XMLDocument\obj\Release\XMLDocument.csproj.CoreCompileInputs.cache
+C:\Users\sjh96\source\repos\XMLParse\XMLDocument\obj\Release\XMLDocument.exe
+C:\Users\sjh96\source\repos\XMLParse\XMLDocument\obj\Release\XMLDocument.pdb

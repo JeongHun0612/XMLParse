@@ -5,22 +5,10 @@ namespace XMLDocument
 {
     class ParserResultModel
     {
-        public ParserResultModel()
-        {
-
-        }
-
         public ParserResultModel(int parentNodeIndex, string localName)
         {
             this.parentNodeIndex = parentNodeIndex;
             this.localName = localName;
-        }
-
-        public ParserResultModel(int parentNodeIndex, string localName, string innerText)
-        {
-            this.parentNodeIndex = parentNodeIndex;
-            this.localName = localName;
-            this.innerText = innerText;
         }
 
         private int parentNodeIndex = 0;
